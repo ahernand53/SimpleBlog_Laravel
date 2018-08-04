@@ -33,7 +33,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('Admin.tags.create');
+        return view('admin.tags.create');
     }
 
     /**

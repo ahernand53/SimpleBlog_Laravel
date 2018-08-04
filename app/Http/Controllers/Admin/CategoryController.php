@@ -33,7 +33,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('Admin.categories.create');
+        return view('admin.categories.create');
     }
 
     /**

@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        @include('layouts.parts.nav')
+        @include('layouts.partials.nav')
 
         @if(session('info'))
             <div class="container" style="margin-top:10px;">
@@ -58,6 +58,6 @@
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')
 
-    @include('layouts.parts.footer')
+    @include('layouts.partials.footer')
 </body>
 </html>
