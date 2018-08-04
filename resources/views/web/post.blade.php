@@ -16,7 +16,7 @@
                                <div class="col-4">
                                   <!-- <img src="imgsystem/co2.jpg" style="width: 50px; height: 50px;" alt="fondo"> --> <span style="color: gray;"> <strong>{{$post->user->name}}</strong></span>
                                  <br>
-                                 <p> <strong>Fecha: <span style="color: gray;">06/06/2018</span></strong></p>
+                                 <p> <strong>Fecha: <span style="color: gray;">{{$post->created_at }}</span></strong></p>
                                  
                              </div>
                                <div class="col-4">

@@ -18,7 +18,7 @@
                <p class="card-text">{{$post->excerpt}}</p>
                <div class="row">
                    <div class="col-sm-4">
-                         <p class="card-text"><small style="color: gray;">Publicado: <span style="color:black">06/06/2018 10:00:01</span> </small></p>
+                         <p class="card-text"><small style="color: gray;">Publicado: <span style="color:black">{{$post->created_at }}</span> </small></p>
                    </div>
                    <div class="col-sm-8">
                          <a href="{{ route('post', $post->slug )  }}" class="btn btn-outline-primary btn-sm active more" role="button" aria-pressed="true">Leer más <i class="fas fa-book-open"></i> </a>

@@ -14,7 +14,7 @@
                         </div>
                         <div class="card-body">
                                 {!! Form::model($post, ['route'=>['posts.update',$post->id],
-                                    'method'=>'PUT']) !!}
+                                    'method'=>'PUT','files'=>'true']) !!}
 
                                         @include('admin.posts.partials.form')
                                         

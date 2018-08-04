@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\Category;
 use App\Tag;
+
+use Illuminate\Support\Facades\Storage; //Clase de almacenamiento
+
 use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\PostUpdateRequest;
 
@@ -49,7 +52,16 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $post = Post::create($request->all());
+       
+        if($request->file('file')){
+            $path= Storage::disk('public')->put('image', $request->file('file'));
+            $post->fill(['file'=> asset($path)])->save();
+        }
+        //Crear sincronización entre las etiquetas creadas y el post
+        $post->tags()->attach($request->get('tags'));
 
+       
+        
         return redirect()->route('posts.edit',$post->id)->with('info','Entrada creada con éxito');
     }
 
@@ -62,6 +74,7 @@ class PostController extends Controller
     public function show($id)
     {
         $posts = Post::find($id);
+        $this->authorize('pass',$posts);
         return view('admin.posts.show',compact('posts'));
     }
 
@@ -73,9 +86,12 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        $post = Post::find($id);
+        $this->authorize('pass',$post);
+
         $categories = Category::orderBy('name','ASC')->pluck('name','id');
         $tags = Tag::orderBy('name','ASC')->get();
-        $post = Post::find($id);
+        
         return view('admin.posts.edit',compact('post','categories','tags'));
     }
 
@@ -89,7 +105,18 @@ class PostController extends Controller
     public function update(PostUpdateRequest $request, $id)
     {
         $post = Post::find($id);
+        $this->authorize('pass',$post);
         $post ->fill($request->all())->save();
+
+        
+        if($request->file('file')){
+            $path= Storage::disk('public')->put('image', $request->file('file'));
+            $post->fill(['file'=> asset($path)])->save();
+        }
+        //Crear sincronización entre las etiquetas creadas y el post
+        $post->tags()->sync($request->get('tags'));
+
+
         return redirect()->route('posts.edit',$post->id)->with('info','Entrada actualizada con éxito');
     }
 
@@ -102,6 +129,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post= Post::find($id)->delete();
+        $this->authorize('pass',$post);
         return back()->with('info','Eliminado correctamente');
     }
 }

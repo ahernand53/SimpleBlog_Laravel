@@ -21,7 +21,7 @@
                                         <h3><strong>Slug </strong></h3> <h5 style="color:gray;">{{$posts->slug}}</h5> 
                                     </div>
                                     <div class="col-md-4 col-sm-12 text-center">
-                                        <h3><strong>Contenido </strong></h3> <h5 style="color:gray;">{{$posts->body}}</h5> 
+                                        <h3><strong>Contenido </strong></h3> {{$posts->excerpt}}
                                     </div>
                                 </div>
                         </div>

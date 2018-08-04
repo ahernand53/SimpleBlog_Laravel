@@ -9,7 +9,7 @@ class Post extends Model
 
     //Salvar datos de forma masiva por formularios
     protected $fillable =[
-        'user_id','Category_id','name','slug','excerpt','body','status','file'
+        'user_id','category_id','name','slug','excerpt','body','status','file'
     ];
 
     //Hacemos las relaciones 
